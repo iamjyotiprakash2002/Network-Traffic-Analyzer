@@ -1,18 +1,19 @@
-# Ignore virtual environment
+# Python
 venv/
 __pycache__/
 *.pyc
 
-# Logs and captures
+# Logs
 logs/
-*.pcap
 *.log
-*.sqlite
+*.pcap
 
-# Node modules
+# Node
 frontend/node_modules/
 build/
+dist/
 
-# OS/system files
+# OS/system
 .DS_Store
+*.sqlite
 .env
