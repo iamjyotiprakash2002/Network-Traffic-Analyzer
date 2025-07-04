@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: network-backend
+    env: python
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "./backend/start.sh"
+    envVars:
+      - key: FLASK_ENV
+        value: production
+
+  - type: static
+    name: network-frontend
+    env: static
+    staticPublishPath: frontend/build
