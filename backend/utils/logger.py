@@ -1,22 +1,36 @@
 import os
 from datetime import datetime
 from scapy.all import wrpcap
+from scapy.utils import wrpcap
 
 # Set the log directory to the top-level "logs/" folder
 LOG_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 # Generate a .pcap filename based on the current date
+# def get_pcap_filename():
+#     today = datetime.now().strftime("%Y-%m-%d")
+#     return os.path.join(LOG_DIR, f"traffic_log_{today}.pcap")
+
 def get_pcap_filename():
-    today = datetime.now().strftime("%Y-%m-%d")
-    return os.path.join(LOG_DIR, f"traffic_log_{today}.pcap")
+    log_dir = os.path.join(os.path.dirname(__file__), "../logs")  # <-- ensures backend/logs/
+    os.makedirs(log_dir, exist_ok=True)
+    filename = f"traffic_log_{datetime.now().date()}.pcap"
+    return os.path.join(log_dir, filename)
 
 # Save packet list to a .pcap file
+# def save_packets_to_pcap(packet_list):
+#     if not packet_list:
+#         return
+#     pcap_path = get_pcap_filename()
+#     wrpcap(pcap_path, packet_list, append=os.path.exists(pcap_path))
+
 def save_packets_to_pcap(packet_list):
     if not packet_list:
         return
     pcap_path = get_pcap_filename()
     wrpcap(pcap_path, packet_list, append=os.path.exists(pcap_path))
+    print(f"[DEBUG] Saved PCAP to: {pcap_path}")
 
 # Append intrusion alert to alert_log.txt with timestamp
 def log_alert(message):

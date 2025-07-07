@@ -12,7 +12,8 @@ import { fetchPackets } from "./services/api";
 import io from "socket.io-client";
 
 // Connect to backend socket server
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+const socket = io("https://your-render-app-url.onrender.com");
 
 function App() {
   const [theme, setTheme] = useState("dark");
