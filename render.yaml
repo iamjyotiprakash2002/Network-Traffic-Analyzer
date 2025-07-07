@@ -1,3 +1,19 @@
+# services:
+#   - type: web
+#     name: network-backend
+#     env: python
+#     plan: free
+#     buildCommand: "pip install -r backend/requirements.txt"
+#     startCommand: "./backend/start.sh"
+#     envVars:
+#       - key: FLASK_ENV
+#         value: production
+
+#   - type: static
+#     name: network-frontend
+#     env: static
+#     staticPublishPath: frontend/build
+
 services:
   - type: web
     name: network-backend
@@ -9,7 +25,11 @@ services:
       - key: FLASK_ENV
         value: production
 
-  - type: static
-    name: network-frontend
-    env: static
+staticSites:
+  - name: network-frontend
     staticPublishPath: frontend/build
+    buildCommand: npm run build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://network-backend.onrender.com
+
